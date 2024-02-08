@@ -5,7 +5,7 @@ import streamlit as st
 import time
 
 
-from actions import (
+from src.actions import (
     enter_credentials,
     go_to_receipts,
     select_period,

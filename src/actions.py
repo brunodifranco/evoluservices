@@ -1,4 +1,4 @@
-from consts import USER, PASSWORD
+from src.consts import USER, PASSWORD
 from playwright.sync_api import Page
 import time
 from pathlib import Path
