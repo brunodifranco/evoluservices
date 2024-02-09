@@ -1,4 +1,4 @@
-# Evoluservices Download App.
+![image](https://github.com/brunodifranco/evoluservices/assets/66283452/afaf7a01-2d76-4391-a9d5-a246e912b21e)# Evoluservices Download App.
 
 Seleciona o período, e baixa o .xlsx do site Evoluservices.
 
@@ -41,17 +41,38 @@ python -m venv .venv_evoluservices
 ```
 obs: Demos o nome de venv_evoluservices, mas pode ser qualquer outro nome.
 
+Então é so ativar o ambiente virtual com:
 
-  
+```
+.venv_evoluservices\Scripts\Activate.bat
+```
+Obs: e se quiser desativar
+```
+deactivate
+```
 
+b) Buildar o app (com o ambiente ativado):
+
+Depois (com o ambiente ativado) instalamos as bibliotecas necessárias com:
+
+```
+pip3 install -r requirements.txt
+```
+
+Então instalamos as dependências necessárias da biblioteca `playwright` utilizando:
+
+```
+playwright install --with-deps firefox
+```
+
+E está pronto!
 
 ### 2.2. Linux
 a) Criando o ambiente virtual
 
 ```
-make createvenv
+make venv
 ```
-
   Então é só ativar o ambiente com:
 ```
 make venvup
@@ -60,11 +81,15 @@ make venvup
 ```
 make venvdown
 ```
-b) Buildar o app:
+b) Buildar o app (com o ambiente ativado):
 
 ```
 make build
 ```
+obs: É possível ver que o ambiente está ativado por conta desse parênteses antes do terminal:
+
+![image](https://github.com/brunodifranco/evoluservices/assets/66283452/eea16bfa-9523-416d-99ba-bb5b7a4a0f76)
+
 
 E feito!
 
