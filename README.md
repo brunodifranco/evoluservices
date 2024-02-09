@@ -78,11 +78,11 @@ make venv
 ```
   Então é só ativar o ambiente com:
 ```
-make venvup
+make up
 ```
   Obs: e se quiser desativar
 ```
-make venvdown
+make down
 ```
 obs: É possível ver que o ambiente está ativado por conta desse parênteses antes do terminal:
 
