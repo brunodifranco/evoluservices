@@ -3,13 +3,11 @@ from src.main import run
 from playwright.sync_api import sync_playwright
 import streamlit as st
 from datetime import datetime
-import subprocess
 
 # from utils import upload_file_to_s3
 
 
 if __name__ == "__main__":
-    subprocess.call(["playwright", "install", "--with-deps", "firefox"])
     # Title
     st.markdown(
         "<h1 style='text-align: center;'>Teste</h1>",
