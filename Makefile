@@ -1,9 +1,12 @@
-build:
-	sudo docker build -t evoluservices_app .
-run:
-	sudo docker run -d -p 8501:8501 --name evoluservices_container evoluservices_app
-down:
-	sudo docker stop evoluservices_container
-	sudo docker rm -f evoluservices_container
-streamlit: 
+make venv:
+	pip3 install virtualenv
+	python3 -m venv .venv_evoluservices
+make venvup:
+	source .venv_evoluservices/bin/activate
+make venvdown:
+	deactivate
+make build:
+	pip3 install -r requirements.txt
+	playwright install --with-deps firefox	
+make run:
 	streamlit run app.py
