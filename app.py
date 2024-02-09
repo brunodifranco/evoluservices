@@ -9,7 +9,7 @@ import subprocess
 
 
 if __name__ == "__main__":
-    subprocess.call["playwright", "install", "--with-deps", "firefox"]
+    subprocess.call(["playwright", "install", "--with-deps", "firefox"])
     # Title
     st.markdown(
         "<h1 style='text-align: center;'>Teste</h1>",
