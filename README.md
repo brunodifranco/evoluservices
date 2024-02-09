@@ -1,5 +1,3 @@
-![image](https://github.com/brunodifranco/evoluservices/assets/66283452/afaf7a01-2d76-4391-a9d5-a246e912b21e)# Evoluservices Download App.
-
 Seleciona o período, e baixa o .xlsx do site Evoluservices.
 
 
