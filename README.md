@@ -22,19 +22,31 @@ Daqui em diante difere a instalação de Linux e Windows.
 
 
 ### 2.1. Windows
-a) Instalando o ambiente virtual
+a) Criando o ambiente virtual dentro da pasta `evoluservices`:
 
-   Primeiro instalamos a biblioteca virtualenv do python com
+Primeiro entramos no PowerShell como administrador e executamos o comando:
 
+```
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+Depois (agora já no terminal cmd pelo VSCode) instalamos a biblioteca `virtualenv` do python com:
 
 ```
 pip install virtualenv
 ```
-  Depois
+  Depois criamos o ambiente virtual com:
+
+```
+python -m venv .venv_evoluservices
+```
+obs: Demos o nome de venv_evoluservices, mas pode ser qualquer outro nome.
+
+
+  
 
 
 ### 2.2. Linux
-a) Instalando o ambiente virtual
+a) Criando o ambiente virtual
 
 ```
 make createvenv
