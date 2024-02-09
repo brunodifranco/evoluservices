@@ -49,6 +49,10 @@ Obs: e se quiser desativar
 deactivate
 ```
 
+obs: É possível ver que o ambiente está ativado por conta desse parênteses antes do terminal:
+
+![image](https://github.com/brunodifranco/evoluservices/assets/66283452/eea16bfa-9523-416d-99ba-bb5b7a4a0f76)
+
 b) Buildar o app (com o ambiente ativado):
 
 Depois (com o ambiente ativado) instalamos as bibliotecas necessárias com:
@@ -79,14 +83,16 @@ make venvup
 ```
 make venvdown
 ```
+obs: É possível ver que o ambiente está ativado por conta desse parênteses antes do terminal:
+
+![image](https://github.com/brunodifranco/evoluservices/assets/66283452/eea16bfa-9523-416d-99ba-bb5b7a4a0f76)
+
 b) Buildar o app (com o ambiente ativado):
 
 ```
 make build
 ```
-obs: É possível ver que o ambiente está ativado por conta desse parênteses antes do terminal:
 
-![image](https://github.com/brunodifranco/evoluservices/assets/66283452/eea16bfa-9523-416d-99ba-bb5b7a4a0f76)
 
 
 E feito!
