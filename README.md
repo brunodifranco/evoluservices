@@ -43,7 +43,7 @@ obs: Demos o nome de venv_evoluservices, mas pode ser qualquer outro nome.
 Então é so ativar o ambiente virtual com:
 
 ```
-.venv_evoluservices\Scripts\Activate.bat
+ .\.venv_evoluservices\Scripts\activate
 ```
 Obs: e se quiser desativar
 ```
@@ -59,7 +59,7 @@ b) Buildar o app (com o ambiente ativado):
 Depois (com o ambiente ativado) instalamos as bibliotecas necessárias com:
 
 ```
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 Então instalamos as dependências necessárias da biblioteca `playwright` utilizando:
@@ -94,8 +94,6 @@ b) Buildar o app (com o ambiente ativado):
 make build
 ```
 
-
-
 E feito!
 
 ## 3. Executando o app
@@ -107,6 +105,11 @@ Basta rodar o comando no terminal (na pasta do repositório obviamente):
 ```
 streamlit run app.py
 ```
+
+Obs: Na primeira vez é preciso adicionar um email:
+
+![image](https://github.com/brunodifranco/evoluservices/assets/66283452/ebac8700-2e49-469f-b096-c8e8960f3286)
+
 
 ### 3.2. Linux
 
