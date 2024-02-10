@@ -1,5 +1,5 @@
 import streamlit as st
-from src.main import run
+from main import run
 from playwright.sync_api import sync_playwright
 import streamlit as st
 from datetime import datetime

@@ -78,11 +78,11 @@ make venv
 ```
   Então é só ativar o ambiente com:
 ```
-make up
+source .venv_evoluservices/bin/activate
 ```
   Obs: e se quiser desativar
 ```
-make down
+deactivate
 ```
 obs: É possível ver que o ambiente está ativado por conta desse parênteses antes do terminal:
 
@@ -93,8 +93,13 @@ b) Buildar o app (com o ambiente ativado):
 ```
 make build
 ```
-
 E feito!
+
+obs: E se quiser desinstalar as bibliotecas, remover o ambiente e os browsers do playwright:
+
+```
+make remove
+```
 
 ## 3. Executando o app
 

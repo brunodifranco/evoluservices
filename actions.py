@@ -1,11 +1,11 @@
-# from src.consts import USER, PASSWORD
+from consts import USER, PASSWORD
 import os
 from playwright.sync_api import Page
 import time
 from pathlib import Path
 
-USER = os.environ['USER']
-PASSWORD = os.environ['PASSWORD']
+# USER = os.environ['USER']
+# PASSWORD = os.environ['PASSWORD']
 
 def enter_credentials(page: Page):
     page.wait_for_load_state("load")

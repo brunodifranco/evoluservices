@@ -5,7 +5,7 @@ import streamlit as st
 import time
 
 
-from src.actions import (
+from actions import (
     enter_credentials,
     go_to_receipts,
     select_period,
@@ -48,13 +48,13 @@ def run(
     time.sleep(3)
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-#     with sync_playwright() as playwright:
-#         run(
-#             playwright=playwright,
-#             url="https://signin.evoluservices.com/",
-#             start_date="04/09/23",
-#             end_date="27/02/24",
-#             download_path="/home/bruno/Downloads/",
-#         )
+    with sync_playwright() as playwright:
+        run(
+            playwright=playwright,
+            url="https://signin.evoluservices.com/",
+            start_date="04/09/23",
+            end_date="27/02/24",
+            download_path="/home/bruno/Downloads/",
+        )
