@@ -1,23 +1,21 @@
-from consts import USER, PASSWORD
-import os
 from playwright.sync_api import Page
 import time
 from pathlib import Path
+from typing import Union
 
-# USER = os.environ['USER']
-# PASSWORD = os.environ['PASSWORD']
 
-def enter_credentials(page: Page):
+def enter_credentials(page: Page, user: str, password: str) -> Union[str, None]:
     page.wait_for_load_state("load")
 
-    page.locator('//*[@id="j_username"]').fill(USER)
-    page.locator('//*[@id="j_password"]').fill(PASSWORD)
+    page.locator('//*[@id="j_username"]').fill(user)
+    page.locator('//*[@id="j_password"]').fill(password)
     page.click("#btn-login button")
 
     page.wait_for_load_state("load")
-
     time.sleep(1)
 
+    if page.locator('//*[@id="invalid-login-or-password"]').is_visible():
+        return "Usuário ou senha inválidos."
 
 def go_to_receipts(page: Page):
 
@@ -58,6 +56,8 @@ def get_search_results(page: Page):
 
     page.get_by_role("button", name="Buscar").click()
     page.wait_for_load_state("load")
+
+    time.sleep(4)
 
     total_results = page.query_selector(
         "td.x-toolbar-cell:nth-child(2) > div.x-form-display-field"
