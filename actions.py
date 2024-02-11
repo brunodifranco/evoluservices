@@ -80,4 +80,7 @@ def download_file(page: Page, download_path: Path):
         ).click()
 
     download = download_info.value
-    download.save_as(download_path + download.suggested_filename)
+    output_path = Path(str(download_path) + "/" + download.suggested_filename)
+    download.save_as(output_path)
+
+
