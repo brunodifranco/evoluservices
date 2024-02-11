@@ -10,9 +10,7 @@ import os
 
 
 def login_form():
-
-    # Login
-    st.sidebar.markdown("#### Entre suas credenciais")
+    st.sidebar.markdown("#### Login")
     user = st.sidebar.text_input("Usuário")
     password = st.sidebar.text_input("Senha", type="password")
 
@@ -30,7 +28,7 @@ def date_form(date_format: str = "DD/MM/YYYY"):
         )
 
         if not end_date >= start_date:
-            st.error("Error: A data final deve ser maior ou igual a inicial.")
+            st.error("Erro: A data final deve ser maior ou igual a inicial.")
 
         st.form_submit_button("Selecione o período desejado")
 
@@ -39,25 +37,8 @@ def date_form(date_format: str = "DD/MM/YYYY"):
 
         return start_date_str, end_date_str
 
-def path_form():
-
-    with st.form("Path"):
-
-        selected_folder_path = st.session_state.get("folder_path", None)
-
-        folder_select_button = st.form_submit_button("Selecione o destino do arquivo")
-        if folder_select_button:
-            selected_folder_path = select_folder()
-            st.session_state.folder_path = selected_folder_path
-
-        if selected_folder_path:
-            st.write("O arquivo será baixado para o destino:", selected_folder_path)
-
-        return selected_folder_path
-
-
 if __name__ == "__main__":
-    # Title
+
     st.markdown(
         "<h1 style='text-align: center;'>Evoluservices Download App</h1>",
         unsafe_allow_html=True,
@@ -65,10 +46,7 @@ if __name__ == "__main__":
 
     user, password = login_form()
     start_date, end_date = date_form()
-
     download_path = Path(os.path.join(os.getcwd() + "/downloads"))
-
-    st.write(download_path)
 
     with st.form("Download"):
 

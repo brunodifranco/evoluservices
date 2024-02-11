@@ -25,7 +25,7 @@ def run(
     download_path: Path,
 ):
 
-    browser = playwright.firefox.launch(headless=False)
+    browser = playwright.firefox.launch(headless=True)
     page = browser.new_context(viewport={"width": 1920, "height": 1040}).new_page()
     page.goto(url)
 
