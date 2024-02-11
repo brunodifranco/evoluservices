@@ -2,8 +2,9 @@ import streamlit as st
 from main import run
 from playwright.sync_api import sync_playwright
 import streamlit as st
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta
 from utils import select_folder
+from pathlib import Path
 
 import os
 
@@ -24,7 +25,9 @@ def date_form(date_format: str = "DD/MM/YYYY"):
         start_date = st.date_input(
             "Data inicial", datetime.today() - timedelta(days=3), format=date_format
         )
-        end_date = st.date_input("Data final",datetime.today() + timedelta(days=7), format=date_format)
+        end_date = st.date_input(
+            "Data final", datetime.today() + timedelta(days=7), format=date_format
+        )
 
         if not end_date >= start_date:
             st.error("Error: A data final deve ser maior ou igual a inicial.")
@@ -33,10 +36,9 @@ def date_form(date_format: str = "DD/MM/YYYY"):
 
         start_date_str = start_date.strftime("%d/%m/%Y")
         end_date_str = end_date.strftime("%d/%m/%Y")
-        
+
         return start_date_str, end_date_str
 
-# ARRUMAR ISSO DAQUI - COLOCAR PRA BAIXAR NA PASTA "downloads" QUE ESTA NO DIRETORIO (VER COMO PEGA ISSO, OCM OS.PWD POR EXEMPLO)
 def path_form():
 
     with st.form("Path"):
@@ -53,6 +55,7 @@ def path_form():
 
         return selected_folder_path
 
+
 if __name__ == "__main__":
     # Title
     st.markdown(
@@ -62,9 +65,10 @@ if __name__ == "__main__":
 
     user, password = login_form()
     start_date, end_date = date_form()
-    download_path = path_form()
-    # download_path = "/home/bruno/evoluservices/"
 
+    download_path = Path(os.path.join(os.getcwd() + "/downloads"))
+
+    st.write(download_path)
 
     with st.form("Download"):
 
@@ -72,7 +76,14 @@ if __name__ == "__main__":
             "Fazer Download do arquivo", use_container_width=True
         )
 
-        if submitted and start_date and end_date and user and password and download_path:
+        if (
+            submitted
+            and start_date
+            and end_date
+            and user
+            and password
+            and download_path
+        ):
 
             with sync_playwright() as playwright:
                 run(
@@ -84,6 +95,6 @@ if __name__ == "__main__":
                     end_date=end_date,
                     download_path=download_path,
                 )
-            
+
         elif submitted:
             st.error("Favor preencher todos os campos antes de baixar o arquivo!")
