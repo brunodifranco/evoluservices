@@ -125,6 +125,17 @@ make run
 ## 4. Como funciona:
 
 
+![image](https://github.com/brunodifranco/evoluservices/assets/66283452/2d458703-a6e3-4a8b-9207-626ed1ffa099)
+
+
+- Insira seu usário e senha
+- Seleciona o período desejado.
+- Clique em "Fazer Download o arquivo"
+
+Obs: 
+ - Se por acaso acontecer erro de Timeout o código tentará ser executado outras 2 vezes (ou até ser executado corretamente), já que esse tipo de erro pode acontecer por se tratar de uma biblioteca de automação web.
+- O arquivo xlsx será baixado para uma pasta chamada "downloads" dentro do seu repositório local.
+
 
 ## 📝 Licença
 
