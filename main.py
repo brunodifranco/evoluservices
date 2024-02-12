@@ -47,7 +47,7 @@ async def run(
         if total_results != 0:
             await download_file(page, download_path)
             st.success("Arquivo baixado com sucesso!")
-            browser.close()
+            await browser.close()
 
         else:
             await browser.close()
@@ -61,15 +61,3 @@ async def run(
             "Usuário ou senha inválidos."
 
         )
-
-
-# if __name__ == "__main__":
-
-#     with sync_playwright() as playwright:
-#         run(
-#             playwright=playwright,
-#             url="https://signin.evoluservices.com/",
-#             start_date="04/09/23",
-#             end_date="27/02/24",
-#             download_path="/home/bruno/Downloads/",
-#         )

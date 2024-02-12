@@ -8,6 +8,7 @@ from utils import select_folder
 from pathlib import Path
 import asyncio
 
+import sys
 import os
 
 
@@ -79,11 +80,13 @@ async def main():
         elif submitted:
             st.error("Favor preencher todos os campos antes de baixar o arquivo!")
 
+if __name__ == "__main__":
+    if sys.platform == "win32":
+        loop = asyncio.ProactorEventLoop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(main())
 
-if __name__ == '__main__':
-    # loop = await asyncio.ProactorEventLoop()
-    loop = asyncio.SelectorEventLoop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(main())
-
-
+    else:
+        loop = asyncio.SelectorEventLoop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(main())
