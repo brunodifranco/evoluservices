@@ -4,83 +4,87 @@ from pathlib import Path
 from typing import Union
 
 
-def enter_credentials(page: Page, user: str, password: str) -> Union[str, None]:
-    page.wait_for_load_state("load")
+async def enter_credentials(page: Page, user: str, password: str) -> Union[str, None]:
+    await page.wait_for_load_state("load")
 
-    page.locator('//*[@id="j_username"]').fill(user)
-    page.locator('//*[@id="j_password"]').fill(password)
-    page.click("#btn-login button")
-
-    page.wait_for_load_state("load")
+    await page.locator('//*[@id="j_username"]').fill(user)
+    await page.locator('//*[@id="j_password"]').fill(password)
+    await page.click("#btn-login button")
+ 
+    await page.wait_for_load_state("load")
     time.sleep(1)
 
-    if page.locator('//*[@id="invalid-login-or-password"]').is_visible():
+    if await page.locator('//*[@id="invalid-login-or-password"]').is_visible():
         return "Usuário ou senha inválidos."
 
-def go_to_receipts(page: Page):
+async def go_to_receipts(page: Page):
 
-    page.locator('//*[@id="receipts"]').click()
-    page.wait_for_load_state("load")
+    await page.locator('//*[@id="receipts"]').click()
+    await page.wait_for_load_state("load")
     time.sleep(2)
 
 
-def select_period(page: Page, start_date: str, end_date: str):
-    page.get_by_label("Data Prevista de Recebimento:").click()
-    page.wait_for_selector(".x-combo-list")
+async def select_period(page: Page, start_date: str, end_date: str):
+    await page.get_by_label("Data Prevista de Recebimento:").click()
+    await page.wait_for_selector(".x-combo-list")
 
     for _ in range(4):
-        page.keyboard.press("ArrowDown")
-    page.keyboard.press("Enter")
+        await page.keyboard.press("ArrowDown")
+    await page.keyboard.press("Enter")
 
     # Data de ínicio
-    page.keyboard.press("Tab")
-    page.locator(
+    await page.keyboard.press("Tab")
+    await page.locator(
         ".x-form-field-wrap.x-form-field-trigger-wrap.evc-periodfield-inicio.x-trigger-wrap-focus input"
     ).fill(start_date)
 
     # Data final
-    page.keyboard.press("Tab")
-    page.locator(
+    await page.keyboard.press("Tab")
+    await page.locator(
         ".x-form-field-wrap.x-form-field-trigger-wrap.evc-periodfield-termino.x-trigger-wrap-focus input"
     ).fill(end_date)
 
 
-def select_receipt_status(page: Page):
-    page.get_by_label("Status do Recebimento:").click()
-    page.locator('.x-combo-list-item span:has-text("A Receber")').click()
+async def select_receipt_status(page: Page):
+    await page.get_by_label("Status do Recebimento:").click()
+    await page.locator('.x-combo-list-item span:has-text("A Receber")').click()
 
-    page.locator('//div[contains(text(), "Valor selecionado:")]').click()
+    await page.locator('//div[contains(text(), "Valor selecionado:")]').click()
 
 
-def get_search_results(page: Page):
+async def get_search_results(page: Page):
 
-    page.get_by_role("button", name="Buscar").click()
-    page.wait_for_load_state("load")
+    await page.get_by_role("button", name="Buscar").click()
+    await page.wait_for_load_state("load")
 
     time.sleep(4)
 
-    total_results = page.query_selector(
+    total_results = await page.query_selector(
         "td.x-toolbar-cell:nth-child(2) > div.x-form-display-field"
-    ).inner_text()
+    )
+
+    total_results = await total_results.inner_text()
+    
+    
 
     return int(total_results)
 
 
-def download_file(page: Page, download_path: Path):
+async def download_file(page: Page, download_path: Path):
 
-    page.keyboard.press("PageDown")
-    page.wait_for_load_state("load")
-    page.get_by_role("button", name="Exportar").click()
+    await page.keyboard.press("PageDown")
+    await page.wait_for_load_state("load")
+    await page.get_by_role("button", name="Exportar").click()
 
     time.sleep(1.5)
 
-    with page.expect_download() as download_info:
-        page.locator(
+    async with page.expect_download() as download_info:
+        await page.locator(
             '//div[@class="x-window-footer x-window-footer-noborder x-panel-btns"]//button[text()="Exportar"]'
         ).click()
 
-    download = download_info.value
+    download = await download_info.value
     output_path = Path(str(download_path) + "/" + download.suggested_filename)
-    download.save_as(output_path)
+    await download.save_as(output_path)
 
 

@@ -15,7 +15,7 @@ from actions import (
 )
 
 
-def run(
+async def run(
     playwright: Playwright,
     url: str,
     user: str,
@@ -25,30 +25,32 @@ def run(
     download_path: Path,
 ):
 
-    browser = playwright.firefox.launch(headless=True)
-    page = browser.new_context(viewport={"width": 1920, "height": 1040}).new_page()
-    page.goto(url)
+    browser = await playwright.firefox.launch(headless=True)
+    # page = await browser.new_context(viewport={"width": 1920, "height": 1040}).new_page()
+    page = await browser.new_page()
+    await page.goto(url)
 
-    login_output = enter_credentials(page, user, password)
+    login_output = await enter_credentials(page, user, password)
 
     if not isinstance(login_output, str):
 
-        go_to_receipts(page)
+        await go_to_receipts(page)
 
-        select_period(page, start_date, end_date)
+        await select_period(page, start_date, end_date)
 
-        select_receipt_status(page)
+        await select_receipt_status(page)
 
-        total_results = get_search_results(page)
+        total_results = await get_search_results(page)
 
 
 
         if total_results != 0:
-            download_file(page, download_path)
+            await download_file(page, download_path)
             st.success("Arquivo baixado com sucesso!")
+            browser.close()
 
         else:
-            browser.close()
+            await browser.close()
             st.error(
                 "O período escolhido não retornou nenhum resultado. Favor escolher outro período."
             )

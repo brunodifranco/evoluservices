@@ -1,10 +1,12 @@
 import streamlit as st
 from main import run
 from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright
 import streamlit as st
 from datetime import datetime, timedelta
 from utils import select_folder
 from pathlib import Path
+import asyncio
 
 import os
 
@@ -36,8 +38,8 @@ def date_form(date_format: str = "DD/MM/YYYY"):
         end_date_str = end_date.strftime("%d/%m/%Y")
 
         return start_date_str, end_date_str
-
-if __name__ == "__main__":
+    
+async def main():
 
     st.markdown(
         "<h1 style='text-align: center;'>Evoluservices Download App</h1>",
@@ -63,8 +65,8 @@ if __name__ == "__main__":
             and download_path
         ):
 
-            with sync_playwright() as playwright:
-                run(
+            async with async_playwright() as playwright:
+                await run(
                     playwright=playwright,
                     url="https://signin.evoluservices.com/",
                     user=user,
@@ -76,3 +78,12 @@ if __name__ == "__main__":
 
         elif submitted:
             st.error("Favor preencher todos os campos antes de baixar o arquivo!")
+
+
+if __name__ == '__main__':
+    # loop = await asyncio.ProactorEventLoop()
+    loop = asyncio.SelectorEventLoop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(main())
+
+
