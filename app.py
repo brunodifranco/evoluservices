@@ -66,16 +66,23 @@ async def main():
             and download_path
         ):
 
-            async with async_playwright() as playwright:
-                await run(
-                    playwright=playwright,
-                    url="https://signin.evoluservices.com/",
-                    user=user,
-                    password=password,
-                    start_date=start_date,
-                    end_date=end_date,
-                    download_path=download_path,
-                )
+            for _ in range(3):
+                try:
+                    async with async_playwright() as playwright:
+                        await run(
+                            playwright=playwright,
+                            url="https://signin.evoluservices.com/",
+                            user=user,
+                            password=password,
+                            start_date=start_date,
+                            end_date=end_date,
+                            download_path=download_path,
+                        )
+                    break
+                except TimeoutError:
+                    st.warning("Tempo limite excedido. Tentando novamente...")
+                    continue
+
 
         elif submitted:
             st.error("Favor preencher todos os campos antes de baixar o arquivo!")
@@ -83,10 +90,8 @@ async def main():
 if __name__ == "__main__":
     if sys.platform == "win32":
         loop = asyncio.ProactorEventLoop()
-        asyncio.set_event_loop(loop)
-        loop.run_until_complete(main())
-
     else:
         loop = asyncio.SelectorEventLoop()
-        asyncio.set_event_loop(loop)
-        loop.run_until_complete(main())
+
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(main())

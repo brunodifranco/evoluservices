@@ -25,7 +25,7 @@ async def run(
     download_path: Path,
 ):
 
-    browser = await playwright.firefox.launch(headless=True)
+    browser = await playwright.firefox.launch(headless=False)
     # page = await browser.new_context(viewport={"width": 1920, "height": 1040}).new_page()
     page = await browser.new_page()
     await page.goto(url)
@@ -38,9 +38,15 @@ async def run(
 
         await select_period(page, start_date, end_date)
 
+       
+
         await select_receipt_status(page)
 
+
+
         total_results = await get_search_results(page)
+
+        
 
 
 
