@@ -42,7 +42,7 @@ async def run(
         Caminho onde o arquivo será baixado.
     """
 
-    browser = await playwright.firefox.launch(headless=False)
+    browser = await playwright.firefox.launch(headless=True)
     page = await browser.new_page()
     await page.goto(url)
 

@@ -134,6 +134,7 @@ make run
 
 Obs: 
  - Se por acaso acontecer erro de Timeout o código tentará ser executado outras 2 vezes (ou até ser executado corretamente), já que esse tipo de erro pode acontecer por se tratar de uma biblioteca de automação web.
+- Se você selecionar um período que não encontrou resultados um erro será gerada, solicitando a escolha de um novo período.
 - O arquivo xlsx será baixado para uma pasta chamada "downloads" dentro do seu repositório local.
 
 
